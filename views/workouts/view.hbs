@@ -1,0 +1,54 @@
+<section class="container">
+    <h2>{{title}}</h2>
+
+    {{#if user}}
+        <p>Welcome, {{user}}!</p>
+        <a href="/workouts/add" class="btn btn-primary mb-3">Add Workout</a>
+    {{else}}
+        <p>Please <a href="/users/login">login</a> to add a workout.</p>
+    {{/if}}
+
+    <!-- Search Form -->
+    <form action="/workouts/search" method="GET" class="mb-4">
+        <div class="input-group">
+            <input type="text" name="query" class="form-control" placeholder="Search for workouts..." value="{{query}}">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </form>
+
+    <div class="row">
+        <div class="col-md-12">
+            {{#if workouts.length}}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Exercise</th>
+                        <th>Duration</th>
+                        <th>Calories Burned</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each workouts}}
+                    <tr>
+                        <td>{{exerciseName}}</td>
+                        <td>{{duration}} minutes</td>
+                        <td>{{caloriesBurned}} kcal</td>
+                        <td>{{date}}</td>
+                        <td>
+                            <a href="/workouts/{{_id}}/edit" class="btn btn-warning">Edit</a>
+                            <form action="/workouts/{{_id}}/delete" method="POST" class="d-inline">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+            {{else}}
+            <p>No workouts recorded yet.</p>
+            {{/if}}
+        </div>
+    </div>
+</section>

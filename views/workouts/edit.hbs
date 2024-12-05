@@ -1,0 +1,29 @@
+<section class="container">
+    <h2>{{title}}</h2>
+
+    {{#if error}}
+        <div class="alert alert-danger">
+            {{error}}
+        </div>
+    {{/if}}
+
+    <form action="/workouts/{{workout._id}}/edit" method="POST">
+        <div class="mb-3">
+            <label for="exerciseName" class="form-label">Exercise Name</label>
+            <input type="text" class="form-control" id="exerciseName" name="exerciseName" value="{{workout.exerciseName}}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="duration" class="form-label">Duration (minutes)</label>
+            <input type="number" class="form-control" id="duration" name="duration" value="{{workout.duration}}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="caloriesBurned" class="form-label">Calories Burned</label>
+            <input type="number" class="form-control" id="caloriesBurned" name="caloriesBurned" value="{{workout.caloriesBurned}}" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update Workout</button>
+        <a href="/workouts/view" class="btn btn-secondary">Cancel</a>
+    </form>
+</section>
